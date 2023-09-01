@@ -28,25 +28,26 @@ resource "aws_internet_gateway" "my-igw" {
   }
 }
 
-resource "aws_nat_gateway" "my-ngw" {
+resource "aws_nat_gateway" "my-ngw-a" {
   allocation_id = aws_eip.eip-private-a.id
   subnet_id     = aws_subnet.private-a.id
 
   tags = {
-    Name = "gw NAT-a"
+    Name = "my-nat-a"
   }
 
   depends_on = [aws_internet_gateway.my-igw]
 }
 
-resource "aws_eip" "eip-private-a" {
-  #domain   = "vpc"
-  network_interface = aws_network_interface.nat-private-a.id
 
+
+resource "aws_eip" "eip-private-a" {
+  #network_interface = aws_network_interface.nat-private-a.id
+  domain = "vpc"
 }
 
-# Route tables
 
+# Route tables
 resource "aws_route_table" "my-route" {
   vpc_id = aws_vpc.my-vpc.id
 
@@ -65,7 +66,7 @@ resource "aws_route_table" "my-nat-route" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.my-ngw.id
+    nat_gateway_id = aws_nat_gateway.my-ngw-a.id
   }
 
   tags = {
