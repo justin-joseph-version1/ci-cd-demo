@@ -11,14 +11,6 @@ resource "aws_security_group" "web-server-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    description = "SSH Traffic"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     cidr_blocks = ["0.0.0.0/0"]
     from_port   = 0
@@ -32,7 +24,6 @@ resource "aws_security_group" "web-server-sg" {
 }
 
 # EC2 instances
-
 resource "aws_instance" "server-a" {
   instance_type     = "t2.medium"
   availability_zone = "us-east-1a"
