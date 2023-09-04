@@ -21,7 +21,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ${{ env.tf_actions_working_dir }}
-          soft_fail: true
+          soft_fail: false
           framework: terraform
           download_external_modules: true
   
