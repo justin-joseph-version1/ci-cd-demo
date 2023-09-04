@@ -1,11 +1,10 @@
 name: security-scan-and-plan
 
 on:
-#  push:
-#    branches-ignore:
-#      - main  
+  push:
+    branches-ignore:
+      - main  
   pull_request:
-
 
 env:
     tf_actions_working_dir: "terraform/"
@@ -16,6 +15,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+      
       - name: Run Checkov action
         id: checkov
         uses: bridgecrewio/checkov-action@master
@@ -34,6 +34,7 @@ jobs:
       pull-requests: write
     steps:
     - uses: actions/checkout@v3
+    
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
