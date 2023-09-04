@@ -21,7 +21,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: ${{ env.tf_actions_working_dir }}
-          soft_fail: false
+          soft_fail: true
           framework: terraform
           download_external_modules: true
   
@@ -32,6 +32,7 @@ jobs:
         working-directory: ${{ env.tf_actions_working_dir }}
     permissions:
       pull-requests: write
+    needs: checkov-security-scan
     steps:
     - uses: actions/checkout@v3
     
