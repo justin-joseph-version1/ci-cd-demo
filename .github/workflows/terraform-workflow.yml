@@ -1,12 +1,11 @@
 name: security-scan-and-plan
 
 on:
-  push:
-    branches-ignore:
-      - main  
+#  push:
+#    branches-ignore:
+#      - main  
   pull_request:
-    branches-ignore:
-      - main    
+
 
 env:
     tf_actions_working_dir: "terraform/"
