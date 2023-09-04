@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "jj-my-ci-cd-demo"
-    key    = "mystatefile"
+    key    = "terraform/ci-cd-demo/tfstate"
     region = "us-east-1"
   }
 }
