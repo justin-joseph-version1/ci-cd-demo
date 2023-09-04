@@ -1,6 +1,9 @@
 name: security-scan-and-plan
 
-on: [push]
+on:
+  push:
+    branches:
+      - '!main'
 
 env:
     tf_actions_working_dir: "terraform/"
@@ -15,7 +18,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: terraform/
+          directory: ${{ env.tf_actions_working_dir }}
           soft_fail: true
           framework: terraform
           download_external_modules: true
@@ -34,17 +37,14 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
-        #role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-        #role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
-        #role-duration-seconds: 1200
-        #role-session-name: MySessionName
+        aws-region: us-east-1
+
     - uses: hashicorp/setup-terraform@v2
     
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
-      continue-on-error: true
+      continue-on-error: false
     
     - name: Terraform Init
       id: init
@@ -52,12 +52,12 @@ jobs:
     
     - name: Terraform Validate
       id: validate
-      run: terraform validate -no-color
+      run: terraform validate
     
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color
-      continue-on-error: true
+      run: terraform plan
+      continue-on-error: false
     
     - uses: actions/github-script@v6
       if: github.event_name == 'pull_request'
