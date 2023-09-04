@@ -1,4 +1,4 @@
-name: security-scan-and-plan
+name: terraform-security-scan-and-plan
 
 on:
   push:
