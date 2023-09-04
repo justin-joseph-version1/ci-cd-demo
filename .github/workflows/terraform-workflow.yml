@@ -119,3 +119,8 @@ jobs:
               body: output
             })
           }
+
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply -auto-approve
+      
