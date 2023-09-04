@@ -2,8 +2,8 @@ name: security-scan-and-plan
 
 on:
   push:
-    branches:
-      - '!main'
+    branches-ignore:
+      - main  
 
 env:
     tf_actions_working_dir: "terraform/"
