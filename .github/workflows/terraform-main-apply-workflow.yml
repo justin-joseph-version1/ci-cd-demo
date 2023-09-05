@@ -3,8 +3,7 @@ name: terraform-apply
 on:
   push:
     branches:
-      - test  
-      - demo-setup
+      - main
   workflow_dispatch:
 
 env:
@@ -17,7 +16,7 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
