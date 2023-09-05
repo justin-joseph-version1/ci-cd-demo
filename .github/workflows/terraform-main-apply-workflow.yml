@@ -31,8 +31,10 @@ jobs:
 #        run: |
 #          echo ${{ steps.version.outputs.previous-version }}
 
-
+# https://github.com/marketplace/actions/github-tag
   version-and-tag:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
