@@ -1,0 +1,12 @@
+on:
+  push:
+    branches-ignore: main
+
+env:
+  TF_DIRECTORY: "terraform/"  
+
+jobs:
+  terraform_plan_using_template:
+    uses: ./.github/workflows/template-terraform-plan.yml
+    with:
+      tf_actions_working_dir: $TF_DIRECTORY
