@@ -1,0 +1,17 @@
+# https://docs.github.com/en/actions/using-workflows/reusing-workflows#calling-a-reusable-workflow
+
+#on:
+#  push:
+#    branches-ignore: main
+#
+#jobs:
+#  terraform_plan_using_template:
+#    uses: ./.github/workflows/template-terraform-plan.yml
+#    permissions:
+#      pull-requests: write  
+#    with:
+#      TF_ACTIONS_WORKING_DIR: "terraform/" 
+#      AWS_REGION: us-east-1
+#    secrets:
+#      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}   
+#      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
