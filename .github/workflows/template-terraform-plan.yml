@@ -6,16 +6,15 @@ on:
       TF_ACTIONS_WORKING_DIR:
         required: true
         type: string
-      AWS_ACCESS_KEY_ID:
-        required: true
-        type: string
-      AWS_SECRET_ACCESS_KEY:
-        required: true
-        type: string    
       AWS_REGION:
         required: false
         type: string  
         default: us-east-1
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 
 jobs:
   reuseable_terraform_plan:
