@@ -3,28 +3,38 @@
 on:
   workflow_call:
     inputs:
-      tf_actions_working_dir:
+      TF_ACTIONS_WORKING_DIR:
         required: true
         type: string
+      AWS_ACCESS_KEY_ID:
+        required: true
+        type: string
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+        type: string    
+      AWS_REGION:
+        required: false
+        type: string  
+        default: us-east-1
 
 env:
-  tf_actions_working_dir: ${{ inputs.tf_actions_working_dir }}
+  TF_ACTIONS_WORKING_DIR: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
 
 jobs:
   reuseable_terraform_plan:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }}
+        working-directory: ${{ env.TF_ACTIONS_WORKING_DIR }}
     steps:
       - uses: actions/checkout@v3
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ inputs.AWS_REGION }}
   
       - uses: hashicorp/setup-terraform@v2
   
