@@ -15,6 +15,6 @@ jobs:
       pull-requests: write  
     with:
         TF_ACTIONS_WORKING_DIR: $TF_DIRECTORY
-        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        AWS_ACCESS_KEY_ID: ${{ github.env.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ github.env.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-1
