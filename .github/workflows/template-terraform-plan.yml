@@ -17,15 +17,12 @@ on:
         type: string  
         default: us-east-1
 
-env:
-  TF_ACTIONS_WORKING_DIR: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
-
 jobs:
   reuseable_terraform_plan:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.TF_ACTIONS_WORKING_DIR }}
+        working-directory: ${{ inputs.TF_ACTIONS_WORKING_DIR }}
     steps:
       - uses: actions/checkout@v3
       
