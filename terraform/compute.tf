@@ -25,7 +25,7 @@ resource "aws_security_group" "web-server-sg" {
 
 # EC2 instances
 resource "aws_instance" "server-a" {
-  count             = 2
+  count             = 3
   instance_type     = "t2.medium"
   availability_zone = "us-east-1a"
   ami               = "ami-051f7e7f6c2f40dc1"
